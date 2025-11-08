@@ -1,128 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>I Love You</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #d8b4fe, #c4b5fd, #a78bfa);
-      font-family: "Poppins", sans-serif;
-      color: #fff;
-      overflow: hidden;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>I Love You</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500&display=swap"
+        rel="stylesheet">
 
-    h1 {
-      font-size: 3em;
-      margin-bottom: 0.5em;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-      animation: fadeIn 2s ease-in-out;
-    }
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #d8b4fe, #c4b5fd, #a78bfa);
+            font-family: "Poppins", sans-serif;
+            color: #fff;
+            overflow: hidden;
+            text-align: center;
+        }
 
-    button {
-      background-color: #a78bfa;
-      border: none;
-      color: white;
-      padding: 12px 28px;
-      border-radius: 30px;
-      font-size: 1em;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
+        h1 {
+            font-family: "Great Vibes", cursive;
+            font-size: 4em;
+            margin-bottom: 0.3em;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            letter-spacing: 1px;
+            animation: fadeIn 2s ease-in-out;
+        }
 
-    button:hover {
-      background-color: #c4b5fd;
-      transform: scale(1.1);
-    }
+        button {
+            background-color: #a78bfa;
+            border: none;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+            font-family: "Poppins", sans-serif;
+            font-weight: 500;
+        }
 
-    .message {
-      display: none;
-      margin-top: 1em;
-      font-size: 1.2em;
-      max-width: 80%;
-      text-align: center;
-      line-height: 1.6;
-      animation: fadeIn 1.5s ease-in-out;
-    }
+        button:hover {
+            background-color: #c4b5fd;
+            transform: scale(1.1);
+        }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+        .message {
+            display: none;
+            margin-top: 1.2em;
+            font-size: 1.3em;
+            max-width: 80%;
+            line-height: 1.7;
+            animation: fadeIn 1.5s ease-in-out;
+        }
 
-    .heart {
-      position: absolute;
-      width: 15px;
-      height: 15px;
-      background: #f5b3e0;
-      transform: rotate(45deg);
-      animation: float 6s ease-in infinite;
-    }
+        .since {
+            margin-top: 0.4em;
+            font-size: 0.7em;
+            opacity: 0.85;
+            font-style: italic;
+            letter-spacing: 0.5px;
+            animation: fadeIn 2s ease-in-out;
+        }
 
-    .heart::before,
-    .heart::after {
-      content: '';
-      position: absolute;
-      width: 15px;
-      height: 15px;
-      background: #f5b3e0;
-      border-radius: 50%;
-    }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
 
-    .heart::before {
-      top: -7px;
-      left: 0;
-    }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    .heart::after {
-      left: 7px;
-      top: 0;
-    }
+        .heart {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #f5b3e0;
+            transform: rotate(45deg);
+            animation: float 6s ease-in infinite;
+        }
 
-    @keyframes float {
-      0% {
-        opacity: 0;
-        transform: translateY(0) rotate(45deg) scale(0.8);
-      }
-      50% {
-        opacity: 1;
-      }
-      100% {
-        opacity: 0;
-        transform: translateY(-800px) rotate(45deg) scale(1.4);
-      }
-    }
-  </style>
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #f5b3e0;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -7px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 7px;
+            top: 0;
+        }
+
+        @keyframes float {
+            0% {
+                opacity: 0;
+                transform: translateY(0) rotate(45deg) scale(0.8);
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-800px) rotate(45deg) scale(1.4);
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <h1>I love you 💜</h1>
-  <button onclick="showMessage()">Click me</button>
-  <div class="message" id="msg">
-    You mean the world to me. Forever and always 💫
-  </div>
+    <h1>I love you, Ree 💘</h1>
+    <button onclick="showMessage()">Click me</button>
+    <div class="message" id="msg">
+        You mean the world to me. Forever and always 💫
+        <div class="since">Since 28 October 2025 💞</div>
+    </div>
 
-  <script>
-    function showMessage() {
-      document.getElementById('msg').style.display = 'block';
-    }
+    <script>
+        function showMessage() {
+            document.getElementById('msg').style.display = 'block';
+        }
 
-    // floating hearts animation
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = 4 + Math.random() * 3 + 's';
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 6000);
-    }
-    setInterval(createHeart, 400);
-  </script>
+        // floating hearts animation
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = 4 + Math.random() * 3 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+        setInterval(createHeart, 400);
+    </script>
 </body>
+
 </html>
