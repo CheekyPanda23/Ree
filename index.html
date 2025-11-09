@@ -5,14 +5,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>I Love You</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Great+Vibes&display=swap"
         rel="stylesheet">
-
     <style>
         body {
             margin: 0;
             height: 100vh;
-            padding: 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -21,10 +19,11 @@
             font-family: "Poppins", sans-serif;
             color: #fff;
             overflow: hidden;
+            padding: 15px;
             text-align: center;
         }
 
-        h1 {
+                h1 {
             font-family: "Great Vibes", cursive;
             font-size: 5em;
             margin-bottom: 0.3em;
@@ -38,13 +37,11 @@
             border: none;
             color: white;
             padding: 12px 28px;
-            border-radius: 40px;
-            font-size: 1.1em;
+            border-radius: 30px;
+            font-size: 1em;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
-            font-family: "Poppins", sans-serif;
-            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         button:hover {
@@ -60,7 +57,6 @@
             line-height: 1.7;
             animation: fadeIn 1.5s ease-in-out;
         }
-
         .since {
             margin-top: 0.4em;
             font-size: 0.7em;
@@ -69,6 +65,7 @@
             letter-spacing: 0.5px;
             animation: fadeIn 2s ease-in-out;
         }
+
 
         @keyframes fadeIn {
             from {
@@ -82,6 +79,7 @@
             }
         }
 
+        /* Background floating hearts */
         .heart {
             position: absolute;
             width: 15px;
@@ -126,45 +124,167 @@
                 transform: translateY(-800px) rotate(45deg) scale(1.4);
             }
         }
+
+        /* Hearts that burst from button */
+        .burst-heart {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: var(--color, #f5b3e0);
+            transform: rotate(45deg);
+            opacity: 0;
+            animation: burst 3s ease-in forwards;
+        }
+
+        .burst-heart::before,
+        .burst-heart::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: var(--color, #f5b3e0);
+            border-radius: 50%;
+        }
+
+        .burst-heart::before {
+            top: -7px;
+            left: 0;
+        }
+
+        .burst-heart::after {
+            left: 7px;
+            top: 0;
+        }
+
+        @keyframes burst {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) rotate(45deg) scale(0.8);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(var(--xMove), var(--yMove)) rotate(45deg) scale(1.4);
+            }
+        }
+
+        /* Floating "I love you" text */
+        .love-text {
+            position: absolute;
+            font-family: "Great Vibes", cursive;
+            color: var(--color, #fff);
+            font-size: 1.8em;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            animation: floatText 3s ease-in forwards;
+            pointer-events: none;
+        }
+
+        @keyframes floatText {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) rotate(0deg) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(var(--xTextMove), var(--yTextMove)) rotate(var(--rotate)) scale(1.2);
+            }
+        }
     </style>
 </head>
 
 <body>
     <h1>I love you, Ree 💘</h1>
-    <button onclick="showMessage()">Click me</button>
+    <button onclick="showLove(event)">Click me</button>
     <div class="message" id="msg">
         You mean the world to me. Forever and always 💫
         <div class="since">Since 28 October 2025 💞</div>
     </div>
 
     <script>
-  let messageShown = false;
+        let messageShown = false;
 
-  function showMessage() {
-    const msg = document.getElementById('msg');
+        function showLove(e) {
+            const msg = document.getElementById('msg');
+            const btn = e.target;
+            const rect = btn.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
 
-    // show message only first time
-    if (!messageShown) {
-      msg.style.display = 'block';
-      messageShown = true;
-    }
+            if (!messageShown) {
+                msg.style.display = 'block';
+                messageShown = true;
+            }
 
-    // create a burst of hearts on every click
-    for (let i = 0; i < 8; i++) {
-      setTimeout(createHeart, i * 150);
-    }
-  }
+            // Burst hearts
+            for (let i = 0; i < 6; i++) createBurstHeart(x, y);
 
-  // floating hearts animation
-  function createHeart() {
-    const heart = document.createElement('div');
-    heart.className = 'heart';
-    heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.animationDuration = 4 + Math.random() * 3 + 's';
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 6000);
-  }
-</script>
+            // Floating love text
+            createLoveText(x, y);
+        }
+
+        function createBurstHeart(x, y) {
+            const heart = document.createElement('div');
+            heart.className = 'burst-heart';
+            heart.style.left = x + 'px';
+            heart.style.top = y + 'px';
+
+            const pastelColors = ['#f5b3e0', '#fbcfe8', '#e9d5ff', '#d8b4fe'];
+            heart.style.setProperty('--color', pastelColors[Math.floor(Math.random() * pastelColors.length)]);
+            heart.style.setProperty('--xMove', (Math.random() - 0.5) * 250 + 'px');
+            heart.style.setProperty('--yMove', - (150 + Math.random() * 200) + 'px');
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 3000);
+        }
+
+        function createLoveText(x, y) {
+            const text = document.createElement('div');
+            text.className = 'love-text';
+            text.innerText = 'love u';
+            text.style.left = x + 'px';
+            text.style.top = y + 'px';
+
+            const pastelColors = ['#ffffff', '#fbcfe8', '#e9d5ff', '#d8b4fe'];
+            text.style.setProperty('--color', pastelColors[Math.floor(Math.random() * pastelColors.length)]);
+            text.style.setProperty('--xTextMove', (Math.random() - 0.5) * 250 + 'px');
+            text.style.setProperty('--yTextMove', - (200 + Math.random() * 100) + 'px');
+            text.style.setProperty('--rotate', (Math.random() - 0.5) * 30 + 'deg');
+            document.body.appendChild(text);
+            setTimeout(() => text.remove(), 3000);
+        }
+
+        // Continuous floating background hearts
+        function randomHearts() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = 4 + Math.random() * 3 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+        setInterval(randomHearts, 400);
+        function randomLoveTexts() {
+                const text = document.createElement('div');
+                text.className = 'love-text';
+                text.innerText = 'love u';
+
+                // Center of screen
+                text.style.left = '50vw';
+                text.style.top = '50vh';
+                text.style.transform = 'translate(-50%, -50%)';
+
+                const pastelColors = ['#ffffff', '#fbcfe8', '#e9d5ff', '#d8b4fe'];
+                text.style.setProperty('--color', pastelColors[Math.floor(Math.random() * pastelColors.length)]);
+                text.style.setProperty('--xTextMove', (Math.random() - 0.5) * 250 + 'px');
+                text.style.setProperty('--yTextMove', - (150 + Math.random() * 150) + 'px');
+                text.style.setProperty('--rotate', (Math.random() - 0.5) * 25 + 'deg');
+                document.body.appendChild(text);
+                setTimeout(() => text.remove(), 3000);
+            }
+
+            setInterval(randomLoveTexts, 3000);
+    </script>
 </body>
 
 </html>
