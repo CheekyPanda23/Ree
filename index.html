@@ -138,21 +138,33 @@
     </div>
 
     <script>
-        function showMessage() {
-            document.getElementById('msg').style.display = 'block';
-        }
+  let messageShown = false;
 
-        // floating hearts animation
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = 4 + Math.random() * 3 + 's';
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 6000);
-        }
-        setInterval(createHeart, 400);
-    </script>
+  function showMessage() {
+    const msg = document.getElementById('msg');
+
+    // show message only first time
+    if (!messageShown) {
+      msg.style.display = 'block';
+      messageShown = true;
+    }
+
+    // create a burst of hearts on every click
+    for (let i = 0; i < 8; i++) {
+      setTimeout(createHeart, i * 150);
+    }
+  }
+
+  // floating hearts animation
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = 4 + Math.random() * 3 + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }
+</script>
 </body>
 
 </html>
